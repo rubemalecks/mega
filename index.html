@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -10,11 +10,6 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
-        }
-
-        input {
-            width: 40px;
-            text-align: center;
         }
 
         #result {
@@ -29,22 +24,18 @@
     <h2>Verificador da Mega Sena</h2>
 
     <p>Insira seus números:</p>
-    <input type="text" id="number1" maxlength="2" oninput="validateInput(this)">
-    <input type="text" id="number2" maxlength="2" oninput="validateInput(this)">
-    <input type="text" id="number3" maxlength="2" oninput="validateInput(this)">
-    <input type="text" id="number4" maxlength="2" oninput="validateInput(this)">
-    <input type="text" id="number5" maxlength="2" oninput="validateInput(this)">
-    <input type="text" id="number6" maxlength="2" oninput="validateInput(this)">
+    <input type="number" id="number1" min="1" max="60">
+    <input type="number" id="number2" min="1" max="60">
+    <input type="number" id="number3" min="1" max="60">
+    <input type="number" id="number4" min="1" max="60">
+    <input type="number" id="number5" min="1" max="60">
+    <input type="number" id="number6" min="1" max="60">
 
     <button onclick="checkNumbers()">Verificar</button>
 
     <p id="result"></p>
 
     <script>
-        function validateInput(input) {
-            input.value = input.value.replace(/\D/g, ''); // Remove não dígitos
-        }
-
         function checkNumbers() {
             var userNumbers = [
                 parseInt(document.getElementById('number1').value),
@@ -54,6 +45,12 @@
                 parseInt(document.getElementById('number5').value),
                 parseInt(document.getElementById('number6').value)
             ];
+
+            // Verifica se há números repetidos
+            if (new Set(userNumbers).size !== userNumbers.length) {
+                document.getElementById('result').textContent = 'Por favor, insira números diferentes.';
+                return;
+            }
 
             var sorteioNumbers = [7, 14, 21, 54, 55, 60];
 
