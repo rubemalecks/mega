@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador da Mega Sena</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        input {
+            width: 40px;
+            text-align: center;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Verificador da Mega Sena</h2>
+
+    <p>Insira seus números:</p>
+    <input type="text" id="number1" maxlength="2" oninput="validateInput(this)">
+    <input type="text" id="number2" maxlength="2" oninput="validateInput(this)">
+    <input type="text" id="number3" maxlength="2" oninput="validateInput(this)">
+    <input type="text" id="number4" maxlength="2" oninput="validateInput(this)">
+    <input type="text" id="number5" maxlength="2" oninput="validateInput(this)">
+    <input type="text" id="number6" maxlength="2" oninput="validateInput(this)">
+
+    <button onclick="checkNumbers()">Verificar</button>
+
+    <p id="result"></p>
+
+    <script>
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+
+        function checkNumbers() {
+            var userNumbers = [
+                parseInt(document.getElementById('number1').value),
+                parseInt(document.getElementById('number2').value),
+                parseInt(document.getElementById('number3').value),
+                parseInt(document.getElementById('number4').value),
+                parseInt(document.getElementById('number5').value),
+                parseInt(document.getElementById('number6').value)
+            ];
+
+            var sorteioNumbers = [7, 14, 21, 54, 55, 60];
+
+            var matchedNumbers = userNumbers.filter(function (number) {
+                return sorteioNumbers.indexOf(number) !== -1;
+            });
+
+            var resultElement = document.getElementById('result');
+
+            if (matchedNumbers.length === 6) {
+                resultElement.textContent = 'Parabéns! Você acertou todos os números!';
+            } else if (matchedNumbers.length > 0) {
+                resultElement.textContent = 'Você acertou ' + matchedNumbers.length + ' números: ' + matchedNumbers.join(', ');
+            } else {
+                resultElement.textContent = 'Você não acertou nenhum número. Tente novamente!';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
