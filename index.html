@@ -38,19 +38,21 @@
     <script>
         function checkNumbers() {
             var userNumbers = [
-                parseInt(document.getElementById('number1').value),
-                parseInt(document.getElementById('number2').value),
-                parseInt(document.getElementById('number3').value),
-                parseInt(document.getElementById('number4').value),
-                parseInt(document.getElementById('number5').value),
-                parseInt(document.getElementById('number6').value)
+                document.getElementById('number1').value,
+                document.getElementById('number2').value,
+                document.getElementById('number3').value,
+                document.getElementById('number4').value,
+                document.getElementById('number5').value,
+                document.getElementById('number6').value
             ];
 
             // Verifica se há números repetidos
-            if (new Set(userNumbers).size !== userNumbers.length) {
+            if (hasDuplicates(userNumbers)) {
                 document.getElementById('result').textContent = 'Por favor, insira números diferentes.';
                 return;
             }
+
+            userNumbers = userNumbers.map(Number); // Converte strings para números
 
             var sorteioNumbers = [7, 14, 21, 54, 55, 60];
 
@@ -67,6 +69,10 @@
             } else {
                 resultElement.textContent = 'Você não acertou nenhum número. Tente novamente!';
             }
+        }
+
+        function hasDuplicates(array) {
+            return (new Set(array)).size !== array.length;
         }
     </script>
 
